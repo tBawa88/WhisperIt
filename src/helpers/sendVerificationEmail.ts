@@ -1,7 +1,6 @@
 import { resend } from "@/lib/resend";
 import VerificationEmail from "../../emails/VerificationEmail";
 import { ApiResponse } from "@/types/ApiResponse";
-import { Verification } from "next/dist/lib/metadata/types/metadata-types";
 
 export const sendVerificatoinEmail = async (
     username: string,
@@ -17,14 +16,14 @@ export const sendVerificatoinEmail = async (
         });
 
         return {
-            successs: true,
+            success: true,
             message: "Successfully sent the verification email"
         }
 
     } catch (error) {
         console.log("Error sending verificatoin email", email)
         return {
-            successs: false,
+            success: false,
             message: "Failed to send verification email"
         }
     }
