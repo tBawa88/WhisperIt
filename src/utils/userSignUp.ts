@@ -4,5 +4,5 @@ export const generateOTP = (): string => {
 }
 export const generateExpiryDate = (): number => {
     const expiryDate = new Date();
-    return expiryDate.setHours(expiryDate.getHours() + 1);
+    return expiryDate.setMinutes(expiryDate.getMinutes() + 30);
 }

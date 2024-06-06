@@ -8,13 +8,15 @@ export const sendVerificatoinEmail = async (
     verificationCode: string
 ): Promise<ApiResponse> => {
     try {
-        await resend.emails.send({
-            from: '<onboarding@resend.dev>',
+        const { data, error } = await resend.emails.send({
+            from: 'onboarding@resend.dev',
             to: email,
             subject: 'WhisperIt Account Verification code',
             react: VerificationEmail({ username, otp: verificationCode }),
         });
 
+        console.log("data from email send ", data)
+        console.log("error from email send ", error)
         return {
             success: true,
             message: "Successfully sent the verification email"
