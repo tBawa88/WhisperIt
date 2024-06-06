@@ -37,6 +37,7 @@ export async function POST(request: Request) {
             } else {
                 //update the exisiting credentials and save user
                 const hashedPassword = await bcrypt.hash(password, 12);
+                existingUserByEmail.username = username;
                 existingUserByEmail.password = hashedPassword;
                 existingUserByEmail.verifyCode = verifyCode;
                 existingUserByEmail.verifyCodeExpire = new Date(Date.now() + 3600);
