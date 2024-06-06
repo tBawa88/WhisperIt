@@ -3,7 +3,7 @@ import UserModel from "@/model/User";
 
 
 export async function POST(request: Request) {
-    dbConnect();
+    await dbConnect();
 
     try {
         const { username, code: enteredCode } = await request.json();
