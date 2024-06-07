@@ -22,12 +22,11 @@ export async function GET(request: Request) {
         //if zod validation fails
         if (!result.success) {
             const usernameErrors = result.error.format().username?._errors || [];
+            console.log("username error -> ", usernameErrors)
             return Response.json({
                 success: false,
-                message: usernameErrors.length > 0
-                    ? usernameErrors.join(', ')
-                    : "Invalid Query parameters (username)"
-            }, { status: 400 })
+                message: usernameErrors[0]
+            })
         }
         //if zod validation passes
         const { username } = result.data;
