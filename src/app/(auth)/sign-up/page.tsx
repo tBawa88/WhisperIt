@@ -28,10 +28,10 @@ import { Loader2 } from "lucide-react"
 
 const page = () => {
     const [username, setUsername] = useState('');
+    const debounced = useDebounceCallback(setUsername, 700);
     const [usernameMessage, setUsernameMessage] = useState('');
     const [isCheckingUsername, setIsCheckingUsername] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const debounced = useDebounceCallback(setUsername, 700);
     const { toast } = useToast();
     const router = useRouter();
 
@@ -65,13 +65,10 @@ const page = () => {
     }, [username])
 
     const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
-
-        console.log('FORM SUBMITTED')
         setIsSubmitting(true);
         try {
             //send post request to sign-up api
             const response = await axios.post<ApiResponse>('/api/sign-up', data);
-            console.log("Response returned from the API -> ", response.data);
             if (response.data.success) {
                 toast({
                     title: 'Success',
@@ -85,8 +82,6 @@ const page = () => {
                     variant: "destructive"
                 });
             }
-
-            // 
         } catch (error) {
             console.error("Error in sign-up of user ->", error)
             toast({
